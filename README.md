@@ -6,8 +6,8 @@
 
 ## 下载
 
-- 当前预览版：[v0.1.0-alpha.3](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.0-alpha.3)
-- 安装包：`InfiniteCanvas-0.1.0-alpha.3-x64.exe`
+- 当前预览版：[v0.1.0-alpha.4](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.0-alpha.4)
+- 安装包：`InfiniteCanvas-0.1.0-alpha.4-x64.exe`
 - 适用平台：Windows x64
 
 这是尚未签名的预览版安装包。Windows SmartScreen 如显示风险提示，请先核对本页 SHA-256；确认一致后，可选择“更多信息”→“仍要运行”。
@@ -15,10 +15,16 @@
 ## 文件校验
 
 ```text
-SHA-256: 4edc575dc1da46e80a099a9beedaa46b4313e4ec82fc4ef54071316448d7fc7f
+SHA-256: c91d8949c2341ca5b60c62d3fa25b82a773467770a5e1eef21e5bb45bbf37de0
 ```
 
 也可下载 Release 中的 `SHA256SUMS.txt` 进行校验。
+
+## 应用内更新
+
+`v0.1.0-alpha.4` 已内置更新器。安装此版本后，后续版本可在软件的“设置 → 偏好设置 → 应用更新”中检查、下载，并由用户确认后重启安装，不需要再打开 GitHub。
+
+`v0.1.0-alpha.3` 及更早版本尚未内置更新器，因此需要最后手动安装一次 `v0.1.0-alpha.4`。
 
 ## 数据和隐私
 
