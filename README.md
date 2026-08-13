@@ -6,8 +6,8 @@
 
 ## 下载
 
-- 当前预览版：[v0.1.0-alpha.5](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.0-alpha.5)
-- 安装包：`InfiniteCanvas-0.1.0-alpha.5-x64.exe`
+- 当前预览版：[v0.1.0-alpha.6](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.0-alpha.6)
+- 安装包：`InfiniteCanvas-0.1.0-alpha.6-x64.exe`
 - 适用平台：Windows x64
 
 这是尚未签名的预览版安装包。Windows SmartScreen 如显示风险提示，请先核对本页 SHA-256；确认一致后，可选择“更多信息”→“仍要运行”。
@@ -15,7 +15,7 @@
 ## 文件校验
 
 ```text
-SHA-256: e70154b964aaa7f50d2506f1dd1460b933a3ad7290de56e5d2f99e15a0e60ccc
+SHA-256: 6eb1da8cdb44acb07569bc788577b3bcfca78f2555bf5dccb94eff6153291315
 ```
 
 也可下载 Release 中的 `SHA256SUMS.txt` 进行校验。
