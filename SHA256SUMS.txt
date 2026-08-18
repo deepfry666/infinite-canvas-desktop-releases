@@ -1,1 +1,1 @@
-e70154b964aaa7f50d2506f1dd1460b933a3ad7290de56e5d2f99e15a0e60ccc  InfiniteCanvas-0.1.0-alpha.5-x64.exe
+ea409833eeaf45d9d134f8fe59d3d5a06ffb3703da43a156663df5f4ea2c4e9d  FourJCanvas-0.1.0-x64.exe

@@ -1,21 +1,21 @@
-# Infinite Canvas Desktop 下载
+# 四季画布 FourJ Canvas 下载
 
-这是 Infinite Canvas Desktop 的公开下载仓库，仅用于发布 Windows 安装包。
+这是四季画布 FourJ Canvas 的公开下载仓库，仅用于发布 Windows 安装包。
 
 本仓库不包含应用源码、开发历史、API 密钥、渠道配置、用户工作区、生成记录或素材。定制版源码在独立私有仓库维护。
 
 ## 下载
 
-- 当前预览版：[v0.1.0-alpha.6](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.0-alpha.6)
-- 安装包：`InfiniteCanvas-0.1.0-alpha.6-x64.exe`
+- 当前正式版：[v0.1.0](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.0)
+- 安装包：`FourJCanvas-0.1.0-x64.exe`
 - 适用平台：Windows x64
 
-这是尚未签名的预览版安装包。Windows SmartScreen 如显示风险提示，请先核对本页 SHA-256；确认一致后，可选择“更多信息”→“仍要运行”。
+这是尚未签名的正式版安装包。Windows SmartScreen 如显示风险提示，请先核对本页 SHA-256；确认一致后，可选择“更多信息”→“仍要运行”。
 
 ## 文件校验
 
 ```text
-SHA-256: 6eb1da8cdb44acb07569bc788577b3bcfca78f2555bf5dccb94eff6153291315
+SHA-256: ea409833eeaf45d9d134f8fe59d3d5a06ffb3703da43a156663df5f4ea2c4e9d
 ```
 
 也可下载 Release 中的 `SHA256SUMS.txt` 进行校验。
