@@ -1,27 +1,27 @@
-# 四季画布 FourJ Canvas v0.1.0
+# 四季画布 FourJ Canvas 版本说明
 
-Windows 桌面正式版。
+本文件记录当前公开更新通道。每个版本的完整变化、安装资产和发布时间以对应的 GitHub Release 为准。
 
-## 本版内容
+## 稳定版
 
-- APIMart 生图与视频工作台按模型能力限制分辨率、比例、时长、参考素材和输出选项，Seedance 首尾帧、编辑与扩展任务自动使用必需参数。
-- APIMart 异步任务的常见英文错误改为更直接的中文说明。
-- 设置页重组为 AI 服务、创作偏好、数据与备份、内容来源、系统与关于，并补充自动保存反馈和渠道删除确认。
-- 首页 FOURJ 闲置光影改为覆盖整页的缓慢氛围效果，滚动条停止滚动后自动隐藏，返回首页时侧栏可正常自动收回。
-- 我的画布和生图记录的指针浮影改为主题自适应暖纸中性色，设置页正常状态的绿色提示更加克制。
-- 版本号和更新通道正式移除 Beta 标识，界面显示 0.1.0。
+- 当前版本：[`v0.1.8-beta.1`](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.8-beta.1)
+- 安装包：`FourJCanvas-0.1.8-beta.1-x64.exe`
+- SHA-256：`5f24be9b6394711a379f6abfba0897ebab366cc57c6e6aa9eaada6399f03c98d`
 
-## 安装前说明
+这个版本沿用完成测试的同一份安装包，因此版本号和文件名保留了 `beta.1`，GitHub Release 和应用更新通道均按稳定版发布。
 
-- 这是正式版本，但仍建议先备份重要数据。
-- 安装包暂未进行代码签名，Windows SmartScreen 可能显示风险提示。
-- 请下载后核对 SHA-256：
+## 测试版
 
-```text
-ea409833eeaf45d9d134f8fe59d3d5a06ffb3703da43a156663df5f4ea2c4e9d
-```
+- 当前版本：[`v0.1.10-beta.2`](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.10-beta.2)
+- 安装包：`FourJCanvas-0.1.10-beta.2-x64.exe`
+- SHA-256：`f3c0ec59be3252f559bcc570da7efcfaaed9f8f33756e49844abedc3d28f3575`
 
-- 安装包不包含 API 密钥、渠道配置、用户工作区或生成素材。
-- `v0.1.0-alpha.4` 及后续版本用户可直接在应用内检查并更新到本版；更早版本需要手动下载安装。
+测试版包含较新的画布、内置对话、素材文件夹和创作统计能力，适合希望优先体验新功能的用户。
 
-本定制版基于 `basketikun/infinite-canvas` 的 MIT 许可代码构建，由 `deepfry666` 独立维护，不是上游官方版本。定制版源码未在本仓库公开。
+## 更多信息
+
+- [软件功能、快速开始与数据说明](README.md)
+- [全部版本与更新说明](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases)
+- [当前安装包校验清单](SHA256SUMS.txt)
+
+当前公开安装包仅适用于 Windows x64，且尚未进行 Windows 代码签名。SHA-256 只能校验文件完整性，不能替代代码签名或证明发布者身份。
