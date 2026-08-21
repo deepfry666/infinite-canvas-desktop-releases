@@ -4,25 +4,25 @@
 
 应用直接安装到 Windows 使用，不需要 Docker、Node、Codex 或单独部署服务。用户自行配置 AI 服务，画布、素材和生成记录保存在本机工作区，也可在设置中调整各类内容的目录。
 
-> 当前功能说明按最新正式版 `v0.1.10-beta.2` 整理。测试版通道目前与稳定版一致。
+> 当前功能说明按最新正式版 `v0.1.10` 整理。测试版通道目前与稳定版一致。
 
 ## 下载
 
 ### 稳定版
 
-- 版本：[`v0.1.10-beta.2`](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.10-beta.2)
-- 安装包：[FourJCanvas-0.1.10-beta.2-x64.exe](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/download/v0.1.10-beta.2/FourJCanvas-0.1.10-beta.2-x64.exe)
-- SHA-256：`f3c0ec59be3252f559bcc570da7efcfaaed9f8f33756e49844abedc3d28f3575`
+- 版本：[`v0.1.10`](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.10)
+- 安装包：[FourJCanvas-0.1.10-x64.exe](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/download/v0.1.10/FourJCanvas-0.1.10-x64.exe)
+- SHA-256：`a3816c1447b241a390f51cbf4a11049802d86ea052d30d19645c7c7ca36681fc`
 
-这个正式版沿用已经完成测试的同一份安装包，因此版本号和文件名保留了 `beta.2`，GitHub Release 和应用更新通道均按稳定版发布。
+本版本从已完成测试的候选版本重新构建，应用内版本、安装包文件名和自动更新清单均已统一为 `v0.1.10`。
 
 ### 测试版
 
-- 版本：[`v0.1.10-beta.2`](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.10-beta.2)
-- 安装包：[FourJCanvas-0.1.10-beta.2-x64.exe](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/download/v0.1.10-beta.2/FourJCanvas-0.1.10-beta.2-x64.exe)
-- SHA-256：`f3c0ec59be3252f559bcc570da7efcfaaed9f8f33756e49844abedc3d28f3575`
+- 当前通道版本：[`v0.1.10`](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.10)
+- 安装包：[FourJCanvas-0.1.10-x64.exe](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/download/v0.1.10/FourJCanvas-0.1.10-x64.exe)
+- SHA-256：`a3816c1447b241a390f51cbf4a11049802d86ea052d30d19645c7c7ca36681fc`
 
-当前没有高于稳定版的新测试版。选择测试版更新通道的用户也会接收 `v0.1.10-beta.2`；后续预发布版本会优先进入该通道。
+当前没有高于稳定版的新测试版。选择测试版更新通道的用户也会接收 `v0.1.10`；后续预发布版本会优先进入该通道，并从 `v0.1.11-beta.1` 开始。
 
 [查看全部版本与更新说明](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases)
 

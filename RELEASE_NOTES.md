@@ -4,19 +4,19 @@
 
 ## 稳定版
 
-- 当前版本：[`v0.1.10-beta.2`](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.10-beta.2)
-- 安装包：`FourJCanvas-0.1.10-beta.2-x64.exe`
-- SHA-256：`f3c0ec59be3252f559bcc570da7efcfaaed9f8f33756e49844abedc3d28f3575`
+- 当前版本：[`v0.1.10`](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.10)
+- 安装包：`FourJCanvas-0.1.10-x64.exe`
+- SHA-256：`a3816c1447b241a390f51cbf4a11049802d86ea052d30d19645c7c7ca36681fc`
 
-这个正式版沿用已经完成测试的同一份安装包，因此版本号和文件名保留了 `beta.2`，GitHub Release 和应用更新通道均按稳定版发布。
+本版本从已完成测试的候选版本重新构建，应用内版本、安装包文件名和自动更新清单均已统一为 `v0.1.10`。
 
 ## 测试版
 
-- 当前版本：[`v0.1.10-beta.2`](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.10-beta.2)
-- 安装包：`FourJCanvas-0.1.10-beta.2-x64.exe`
-- SHA-256：`f3c0ec59be3252f559bcc570da7efcfaaed9f8f33756e49844abedc3d28f3575`
+- 当前通道版本：[`v0.1.10`](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.10)
+- 安装包：`FourJCanvas-0.1.10-x64.exe`
+- SHA-256：`a3816c1447b241a390f51cbf4a11049802d86ea052d30d19645c7c7ca36681fc`
 
-当前没有高于稳定版的新测试版。测试版更新通道目前同样接收 `v0.1.10-beta.2`，后续预发布版本会优先进入该通道。
+当前没有高于稳定版的新测试版。测试版更新通道目前同样接收 `v0.1.10`；后续预发布版本会优先进入该通道，并从 `v0.1.11-beta.1` 开始。
 
 ## 更多信息
 

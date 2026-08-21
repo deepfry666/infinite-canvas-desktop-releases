@@ -1,1 +1,1 @@
-f3c0ec59be3252f559bcc570da7efcfaaed9f8f33756e49844abedc3d28f3575  FourJCanvas-0.1.10-beta.2-x64.exe
+a3816c1447b241a390f51cbf4a11049802d86ea052d30d19645c7c7ca36681fc  FourJCanvas-0.1.10-x64.exe
