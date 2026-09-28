@@ -12,11 +12,11 @@
 
 ## 测试版
 
-- 当前通道版本：[`v0.1.11-beta.3`](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.11-beta.3)
-- 安装包：`FourJCanvas-0.1.11-beta.3-x64.exe`
-- SHA-256：`4a3ee1c6db3b2635371c089ef3ded8872c27a6197e1bc41651d8620f1b35167e`
+- 当前通道版本：[`v0.1.11-beta.4`](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.11-beta.4)
+- 安装包：`FourJCanvas-0.1.11-beta.4-x64.exe`
+- SHA-256：`1432a3719a7d9e9fe1389e0024b353dbc3147a15fac4b2a7efadabb44f3026a0`
 
-该测试版修复 CPA 等 OpenAI 兼容中转返回图片 URL 数组时被工作台误判为生成失败的问题，并兼容单个图片对象与 `image_url` / `imageUrl` 字段。
+该测试版修复 CPA 返回远程图片地址但桌面下载失败时被误报为生成失败的问题，并继续兼容图片 URL 数组、图片对象和 `image_url` / `imageUrl` 字段。
 
 ## 更多信息
 
