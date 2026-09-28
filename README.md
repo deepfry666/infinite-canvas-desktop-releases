@@ -4,7 +4,7 @@
 
 应用直接安装到 Windows 使用，不需要 Docker、Node、Codex 或单独部署服务。用户自行配置 AI 服务，画布、素材和生成记录保存在本机工作区，也可在设置中调整各类内容的目录。
 
-> 当前功能说明按最新正式版 `v0.1.10` 整理。测试版通道目前与稳定版一致。
+> 当前功能说明按最新正式版 `v0.1.10` 整理。测试版通道当前为 `v0.1.11-beta.3`。
 
 ## 下载
 
@@ -18,11 +18,11 @@
 
 ### 测试版
 
-- 当前通道版本：[`v0.1.10`](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.10)
-- 安装包：[FourJCanvas-0.1.10-x64.exe](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/download/v0.1.10/FourJCanvas-0.1.10-x64.exe)
-- SHA-256：`a3816c1447b241a390f51cbf4a11049802d86ea052d30d19645c7c7ca36681fc`
+- 当前通道版本：[`v0.1.11-beta.3`](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/tag/v0.1.11-beta.3)
+- 安装包：[FourJCanvas-0.1.11-beta.3-x64.exe](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases/download/v0.1.11-beta.3/FourJCanvas-0.1.11-beta.3-x64.exe)
+- SHA-256：`4a3ee1c6db3b2635371c089ef3ded8872c27a6197e1bc41651d8620f1b35167e`
 
-当前没有高于稳定版的新测试版。选择测试版更新通道的用户也会接收 `v0.1.10`；后续预发布版本会优先进入该通道，并从 `v0.1.11-beta.1` 开始。
+该测试版修复 CPA 等 OpenAI 兼容中转返回图片 URL 数组时被工作台误判为生成失败的问题，并兼容单个图片对象与 `image_url` / `imageUrl` 字段。
 
 [查看全部版本与更新说明](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases)
 
