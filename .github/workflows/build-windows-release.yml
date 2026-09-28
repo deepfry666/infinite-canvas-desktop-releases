@@ -1,0 +1,91 @@
+name: Build Windows release
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_ref:
+        description: Source repository ref to build
+        required: true
+        default: v0.1.11
+      release_tag:
+        description: Release tag to create in this repository
+        required: true
+        default: v0.1.11
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    env:
+      SOURCE_REF: ${{ inputs.source_ref }}
+      RELEASE_TAG: ${{ inputs.release_tag }}
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          repository: deepfry666/infinite-canvas-desktop
+          ref: ${{ inputs.source_ref }}
+          path: source
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: source/package-lock.json
+
+      - name: Install dependencies
+        shell: pwsh
+        run: |
+          npm ci --prefix source
+          npm ci --prefix source/web --legacy-peer-deps
+
+      - name: Build Windows x64 installer
+        shell: pwsh
+        run: npm run desktop:dist:win --prefix source
+
+      - name: Prepare release assets
+        shell: pwsh
+        run: |
+          $output = Join-Path $env:GITHUB_WORKSPACE "source/release/windows"
+          $installer = Get-ChildItem $output -File -Filter "*.exe" | Select-Object -First 1
+          if (-not $installer) { throw "Windows installer was not produced" }
+          $blockmap = Get-ChildItem $output -File -Filter "*.blockmap" | Select-Object -First 1
+          $version = $env:RELEASE_TAG.TrimStart('v')
+          $sha512 = (Get-FileHash $installer.FullName -Algorithm SHA512).Hash.ToLowerInvariant()
+          $latest = @(
+            "version: $version",
+            "files:",
+            "  - url: $($installer.Name)",
+            "    sha512: $sha512",
+            "    size: $($installer.Length)",
+            "path: $($installer.Name)",
+            "sha512: $sha512",
+            "releaseDate: $(Get-Date -Format o)"
+          )
+          $latest | Set-Content (Join-Path $output "latest.yml") -Encoding utf8
+          $hashLines = Get-ChildItem $output -File | Where-Object { $_.Name -match '\.(exe|blockmap|yml)$' } | ForEach-Object {
+            "$( (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant() )  $($_.Name)"
+          }
+          $hashLines | Set-Content (Join-Path $output "SHA256SUMS.txt") -Encoding utf8
+          @(
+            "# 四季画布 FourJ Canvas $env:RELEASE_TAG",
+            "",
+            "本次版本修复 CPA 等 OpenAI 兼容中转返回图片 URL 数组时被工作台误判为生成失败的问题。",
+            "",
+            "Windows x64 安装包由 GitHub Actions Windows runner 构建，安装包、自动更新清单、blockmap 与 SHA-256 校验清单均随本 Release 发布。",
+            "",
+            "当前安装包未进行 Windows 代码签名。"
+          ) | Set-Content (Join-Path $output "RELEASE_BODY.md") -Encoding utf8
+
+      - name: Publish release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $output = Join-Path $env:GITHUB_WORKSPACE "source/release/windows"
+          $assets = Get-ChildItem $output -File | Where-Object { $_.Name -match '\.(exe|blockmap|yml|txt)$' } | ForEach-Object { $_.FullName }
+          gh release create $env:RELEASE_TAG --repo deepfry666/infinite-canvas-desktop-releases --title "四季画布 FourJ Canvas $env:RELEASE_TAG" --notes-file (Join-Path $output "RELEASE_BODY.md") --latest @assets
