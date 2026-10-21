@@ -5,6 +5,8 @@ description: Implemented changes that still need manual verification
 
 # Pending Tests
 
+Reviewed source now lives in the existing public release repository, with MIT/third-party notices and developer-machine migration instructions. The merged import and preserved historical tags/assets are recorded in `SOURCE_VERIFICATION.md`; the next installer still requires the platform checks below.
+
 The public-source snapshot does not create a new installer release. Its supported Node 24 environment, unchanged test assertions, typecheck, and renderer build have been checked; see `SOURCE_VERIFICATION.md`. The snapshot excludes MiSans binaries and uses the existing system fallback when MiSans is not installed. Validate text wrapping, font sharpness, packaging notices, stable/preview updates, and workspace preservation on Windows before the next release.
 
 The desktop version label and the System & about section should show the complete v0.1.11-beta.4 version.

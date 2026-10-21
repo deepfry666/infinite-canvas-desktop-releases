@@ -11,6 +11,5 @@ description: Planned follow-up work
 - Design a provider-agnostic capability profile and optional probe flow after the APIMart-specific rules have been validated, without assuming that different relay providers share ratios, batch counts, or reference constraints.
 - Move creation history to append-only event storage with a compact summary index so long-running installations avoid whole-document rewrites and WebDAV write amplification; preserve existing entries, clearing tombstones, and stable event IDs during the migration.
 - Design and implement project-first, creation-session-second asset organization, using media type and date only for filtering and sorting. Migrate every legacy canvas, generation record, and media file with a recovery point and post-migration reference validation; content without a reliable project mapping must remain searchable and previewable under an Imported history / Unfiled group.
-- [ ] Consolidate reviewed source into the existing public release repository, with licensing, font notices, and developer-machine migration instructions; preserve update URLs, historical tags, and release assets.
 - [ ] Validate the public source on Windows: packaging, stable/preview updates, and workspace preservation. Repository consolidation is not platform acceptance.
 

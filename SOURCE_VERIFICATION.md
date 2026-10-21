@@ -12,6 +12,7 @@ This is a reviewed source import, not a new desktop release. `SOURCE_SNAPSHOT.js
 - All desktop `.mjs` files, including application identity, workspace, storage, and update implementations, are byte-identical to the baseline. Runtime edits are limited to removing bundled MiSans font declarations/preload and updating the two localized source-license notices.
 - The retained Noto Serif SC and PT Serif binaries match the baseline and include their OFL texts. MiSans binaries, the optional separately licensed external plugin, copied third-party protocol prose, and local agent skill metadata are excluded or replaced as documented in `THIRD_PARTY_NOTICES.md`.
 - Public-file disclosure checks and a redacted Gitleaks scan cover the exported source set; dependency trees, build caches, private Git history, and local verification records are not imported. Independent review checks the actual staged file set before publication.
+- [Source import PR #4](https://github.com/deepfry666/infinite-canvas-desktop-releases/pull/4) is merged and the remote source tree matches the reviewed commit. A post-merge comparison confirms all original 35 tags, 36 Releases, and asset metadata are unchanged; stable and preview manifests remain anonymously readable with their original SHA-256 hashes.
 
 ## Not Verified
 
