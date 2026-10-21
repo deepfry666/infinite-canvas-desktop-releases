@@ -1,0 +1,10 @@
+{
+  "title": "Development",
+  "root": true,
+  "defaultOpen": true,
+  "pages": [
+    "design-system",
+    "local-development",
+    "canvas-data-structure"
+  ]
+}

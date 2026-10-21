@@ -1,21 +1,7 @@
-Infinite Canvas Desktop — Proprietary Modification Notice
-
-Copyright (c) 2026 deepfry666. All rights reserved.
-
-The original modifications, desktop integration, configuration, documentation,
-branding, and other additions made for Infinite Canvas Desktop are proprietary.
-No permission is granted to copy, publish, distribute, sublicense, sell, or
-create derivative works from those proprietary additions without prior written
-authorization from the copyright holder.
-
-This restriction does not replace or limit the licenses of third-party or
-upstream components. This distribution contains substantial portions derived
-from basketikun/infinite-canvas, which remain available under the following MIT
-License. The upstream copyright and permission notice are reproduced in full:
-
 MIT License
 
 Copyright (c) 2026 basketikun
+Copyright (c) 2026 deepfry666
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

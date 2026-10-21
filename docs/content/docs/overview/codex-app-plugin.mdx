@@ -1,0 +1,55 @@
+---
+title: Legacy Codex App Plugin
+description: Historical Infinite Canvas plugin integration; not part of the current FourJ Canvas desktop user flow
+---
+
+# Legacy Codex App Plugin
+
+> This integration belongs to the retained Infinite Canvas ecosystem. It is not installed, displayed, or required by the current FourJ Canvas desktop product, which provides only the built-in Chat entry inside a canvas.
+
+> This public snapshot excludes the optional plugin and its marketplace metadata. The instructions below target the upstream repository: obtain the plugin separately and follow its independent license rather than assuming this repository's root MIT applies to it.
+
+The plugin connects Codex to a local Canvas Agent, allowing Codex to open Infinite Canvas, read and create nodes, connect nodes, and start generation workflows. Its source is in `plugins/infinite-canvas/` in upstream `basketikun/infinite-canvas`, not in this public snapshot.
+
+## Ask Codex to install it
+
+Send this request to Codex:
+
+```text
+Install the Infinite Canvas Codex plugin from https://github.com/basketikun/infinite-canvas.git.
+Clone it to ~/plugins/infinite-canvas, verify plugins/infinite-canvas/.codex-plugin/plugin.json,
+add the repository to my personal marketplace with `codex plugin marketplace add ~`,
+then install `infinite-canvas@personal`. Validate the installation and tell me whether a new
+conversation is required to load the Skill and MCP tools.
+```
+
+## Manual installation
+
+```bash
+mkdir -p ~/plugins
+git clone https://github.com/basketikun/infinite-canvas.git ~/plugins/infinite-canvas
+codex plugin marketplace add ~
+codex plugin add infinite-canvas@personal
+```
+
+The personal marketplace entry must point to `./plugins/infinite-canvas/plugins/infinite-canvas`. Start a new Codex conversation after installation so the Skill and MCP tools load completely.
+
+For development from a separately obtained upstream clone with its marketplace metadata:
+
+```bash
+cd /path/to/infinite-canvas
+codex plugin marketplace add "$(pwd)"
+codex plugin add infinite-canvas@infinite-canvas-local
+```
+
+## Usage
+
+In a new Codex conversation, ask it to open Infinite Canvas, create a canvas, and connect Codex. The plugin starts Canvas Agent, reads its connection URL and token, opens `https://canvas.best/`, and creates and connects a canvas. It starts a local frontend only when explicitly requested.
+
+You can then ask Codex to summarize the current canvas, create prompts from selected nodes, or organize nodes into a generation workflow.
+
+Reinstall or refresh the plugin after changing its manifest, MCP configuration, Skills, exposed MCP tools, app, or entry scripts. The agent's default MCP command is:
+
+```bash
+npx -y @basketikun/canvas-agent mcp
+```

@@ -1,0 +1,126 @@
+{
+  "name": "infinite-canvas-desktop",
+  "version": "0.1.11-beta.4",
+  "private": true,
+  "type": "module",
+  "author": "deepfry666",
+  "license": "MIT",
+  "description": "FourJ Canvas desktop AI visual workspace",
+  "main": "desktop/main.mjs",
+  "scripts": {
+    "desktop:dev": "concurrently -k \"npm --prefix web run dev\" \"wait-on http://localhost:3000 && cross-env ELECTRON_START_URL=http://localhost:3000 electron .\"",
+    "setup": "npm --prefix web install --legacy-peer-deps",
+    "desktop:preview": "npm --prefix web run build && electron .",
+    "web:build": "npm --prefix web run build",
+    "web:typecheck": "npm --prefix web run typecheck",
+    "desktop:pack": "npm run desktop:pack:win",
+    "desktop:dist": "npm run desktop:dist:win",
+    "desktop:pack:win": "npm run web:build && electron-builder --win --x64 --dir",
+    "desktop:dist:win": "npm run web:build && electron-builder --win --x64",
+    "desktop:release:win": "npm run web:build && electron-builder --win --x64 --publish always",
+    "desktop:pack:mac": "npm run web:build && electron-builder --mac --arm64 --dir --config.directories.output=release/macos/arm64",
+    "desktop:dist:mac": "npm run web:build && electron-builder --mac --arm64 --config.directories.output=release/macos/arm64",
+    "desktop:dist:mac:x64": "npm run web:build && electron-builder --mac --x64 --config.directories.output=release/macos/x64",
+    "desktop:dist:mac:universal": "npm run web:build && electron-builder --mac --universal --config.directories.output=release/macos/universal",
+    "icons:generate": "node scripts/generate-icons.mjs",
+    "test": "node --test desktop/creative-skill-store.test.mjs desktop/workspace-path.test.mjs desktop/workspace-store.test.mjs desktop/workspace-migration.test.mjs desktop/runtime-profile-migration.test.mjs desktop/window-close-policy.test.mjs desktop/update-policy.test.mjs desktop/update-cache.test.mjs && node --experimental-transform-types --test web/src/hooks/use-pointer-halo.test.ts web/src/lib/agent/builtin-agent-conversations.test.ts web/src/lib/app-shell-state.test.ts web/src/lib/app-sync-manifest.test.ts web/src/lib/asset-library.test.ts web/src/lib/asset-package-manifest.test.ts web/src/lib/canvas/create-menu-layout.test.ts web/src/lib/canvas/creative-skill-materialization.test.ts web/src/lib/canvas/debounced-writer.test.ts web/src/lib/canvas/floating-toolbar-layout.test.ts web/src/lib/canvas/generation-runtime.test.ts web/src/lib/canvas/wheel-routing.test.ts web/src/lib/creative-history.test.ts web/src/lib/creative-skill-run-ledger.test.ts web/src/lib/creative-skill-runner.test.ts web/src/lib/creative-skills/canvas-runtime-request.test.ts web/src/lib/creative-skills/chat-execution.test.ts web/src/lib/creative-skills/compiler.test.ts web/src/lib/creative-skills/draft-sources.test.ts web/src/lib/creative-skills/schema.test.ts web/src/lib/creative-skills/style-extraction.test.ts web/src/lib/generation-log-merge.test.ts web/src/lib/generation-log-operation.test.ts web/src/lib/generation-trash.test.ts web/src/lib/image-generation-log-lifecycle.test.ts web/src/lib/model-onboarding.test.ts web/src/lib/prompt-tags.test.ts web/src/lib/route-transition-history.test.ts web/src/lib/view-transition-ownership.test.ts web/src/pages/home/home-brand-motion.test.ts web/src/services/asset-storage-cleanup.test.ts web/src/services/creative-skill-library.test.ts web/src/services/creative-skill-run-storage.test.ts web/src/services/provider/provider-error.test.ts web/src/stores/use-agent-store.test.ts web/src/stores/use-image-workbench-store.test.ts",
+    "check": "npm run web:typecheck && npm run web:build"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.0.0",
+    "electron": "^43.4.0",
+    "electron-builder": "^26.0.12",
+    "sharp": "0.35.3",
+    "wait-on": "^9.0.1"
+  },
+  "build": {
+    "appId": "com.infinitecanvas.desktop",
+    "productName": "四季画布 FourJ Canvas",
+    "asar": true,
+    "files": [
+      "desktop/**/*",
+      "!desktop/**/*.test.mjs",
+      "build/icon-win.png",
+      "web/dist/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "LICENSE",
+        "to": "LICENSE.txt"
+      },
+      {
+        "from": "NOTICE.md",
+        "to": "NOTICE.md"
+      },
+      {
+        "from": "THIRD_PARTY_NOTICES.md",
+        "to": "THIRD_PARTY_NOTICES.md"
+      }
+    ],
+    "directories": {
+      "output": "release/windows"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "deepfry666",
+      "repo": "infinite-canvas-desktop-releases",
+      "releaseType": "prerelease"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon-win.png",
+      "artifactName": "FourJCanvas-${version}-${arch}.${ext}"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.graphics-design",
+      "darkModeSupport": true,
+      "icon": "build/icon.icns",
+      "identity": null,
+      "artifactName": "FourJCanvas-${version}-${arch}.${ext}"
+    },
+    "dmg": {
+      "title": "四季画布 FourJ Canvas ${version}",
+      "iconSize": 96,
+      "contents": [
+        {
+          "x": 170,
+          "y": 200
+        },
+        {
+          "x": 390,
+          "y": 200,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.9",
+    "fflate": "^0.8.3"
+  },
+  "repository": "https://github.com/deepfry666/infinite-canvas-desktop-releases",
+  "engines": {
+    "node": ">=24.0.0 <25"
+  }
+}

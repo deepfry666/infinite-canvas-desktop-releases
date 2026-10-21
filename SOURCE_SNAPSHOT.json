@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "project": "FourJ Canvas",
+  "sourceCommit": "1248abc07dd3097c9cf535eb0dfa0ae48e138cdf",
+  "baselineVersion": "0.1.11-beta.4",
+  "importMode": "reviewed source snapshot; private Git history excluded",
+  "historicalTags": "Existing public release tags and assets are preserved; they do not identify this imported source tree.",
+  "verification": "See OPEN_SOURCE.md and repository-consolidation verification documentation; no new installer was built or published."
+}

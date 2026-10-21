@@ -1,0 +1,10 @@
+{
+  "title": "Overview",
+  "root": true,
+  "defaultOpen": true,
+  "pages": [
+    "quick-start",
+    "features",
+    "third-party-prompt-repositories"
+  ]
+}

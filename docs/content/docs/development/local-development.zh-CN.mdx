@@ -1,0 +1,35 @@
+---
+title: 本地开发
+description: Electron 桌面应用的本地开发方式
+---
+
+# 本地开发
+
+四季画布的产品形态是 Electron 桌面应用。`web/` 是桌面窗口使用的 React 渲染层目录，不是独立网页端；AI 请求由渲染层直连用户配置的 OpenAI 兼容接口。
+
+## 1. 启动桌面应用
+
+```bash
+npm run setup
+npm run desktop:dev
+```
+
+开发模式会临时启动 `http://localhost:3000` 供 Electron 加载。该地址仅用于本机调试；正式安装包加载 `web/dist` 中的本地资源。
+
+## 2. 配置模型
+
+在设置中填写自己的 `Base URL`、`API Key` 和模型名。第三方提示词和 WebDAV 都由桌面渲染层直连。
+
+## 3. 启动文档站
+
+如果需要单独调整文档站，在 `docs` 目录执行：
+
+```bash
+bun run dev
+```
+
+## 常见场景
+
+- 改画布、页面和交互：主要看桌面渲染层 `web/`
+- 改提示词缓存：主要看 `web/src/services/api/prompts.ts`
+- 改文档站内容：主要看 `docs/content/docs/`
