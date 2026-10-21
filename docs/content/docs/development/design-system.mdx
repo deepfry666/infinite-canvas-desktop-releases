@@ -1,0 +1,69 @@
+---
+title: Design System
+description: FourJ Canvas "Ink & Cinnabar" design system: brand, tokens, fonts, motion, and rollout plan
+---
+
+# FourJ Canvas Design System
+
+This is the single source of truth for the frontend redesign, written for developers and agents joining later. The Chinese version is the canonical reference.
+
+## Brand
+
+- **Name: FourJ Canvas** (Chinese: 四季画布), short **FourJ**. Named on 2026-08-17.
+- Meaning: four Js = the author's nickname JJJJ; FourJ sounds like "For J"; the four seasons include winter, which the author likes.
+- Tagline: 四季流转，画布常新 (Seasons turn, the canvas stays new).
+- Logo: **Wandering Trace** (游痕) — one continuous, asymmetrical gesture with four rhythmic turns; the four Js are implied in the moving trace rather than drawn literally, see `web/public/logo.svg`.
+- The desktop install display name is now **四季画布 FourJ Canvas**. The `appId` remains `com.infinitecanvas.desktop`; packaged `userData`/`sessionData` stay pinned to the legacy `appData/无限画布`, and the default workspace remains `无限画布工作区`, so upgrades keep existing settings and local content visible.
+- Canvas-agent ecosystem names (Codex plugin, MCP `infinite-canvas`, npm package) intentionally stay "Infinite Canvas" — they are upstream technical identifiers.
+
+## Design tokens
+
+Single source: `web/src/lib/design-tokens.ts` (TS). Consumers:
+
+- `lib/app-theme.ts` — antd ConfigProvider tokens (derived in code).
+- `lib/canvas-theme.ts` — canvas themes (derived in code, export shape unchanged).
+- `styles/globals.css` — shadcn/Tailwind CSS variables in `:root` / `.dark` (**manually kept in sync; change colors in both places**).
+
+Brand color is a clearer cinnabar (`#c54232` light / `#e06a59` dark), paired with a restrained champagne-gold moving glint (`#d5ae62` / `#e8c985`). Strategy: **ink primary, cinnabar as accent** — antd primary actions, links, and selected states use ink (black/paper), while cinnabar is reserved for brand elements, restrained home-page emphasis, canvas selection strokes, and charts. Gold appears only at the moving highlight core and never replaces the persistent brand or selected-state color. Light surfaces remain `#faf8f4` (page) / `#f6f4ee` (canvas). See the token table in the Chinese document.
+
+## Fonts
+
+- The typography system follows the existing MiMo-inspired font stack. The public snapshot bundles only Noto Serif SC and PT Serif under `public/fonts/mimo/`, with their OFL licenses. MiSans binaries are excluded until redistribution rights are confirmed: a legally installed system copy may be used, otherwise the existing system sans-serif fallback applies. No local or network MiSans font is requested. The previous LXGW WenKai and JetBrains Mono assets are no longer loaded or distributed.
+- The root document uses `text-rendering: optimizeLegibility` plus platform font smoothing, and containers holding small navigation text must clear transforms, translations, and fill animations after motion settles so Chromium does not keep resampling text on a composited layer.
+- Body copy, navigation, controls, status text, numbers, and code use the existing sans-serif stack, optionally headed by system-installed **MiSans**. Size and weight tokens remain unchanged: normal text and controls stay at 400, selected emphasis uses 500, and 600 is reserved for strong emphasis, with 700 available for explicit brand emphasis. Actual fallback glyphs and wrapping need Windows validation. Chinese display headings use **Noto Serif SC Variable** at 400/500, while English display headings use **PT Serif** at 400. MiSans in the semantic-class list means the preferred family, not a bundled asset.
+- Semantic classes: `.type-body` (MiSans 16/400), `.type-label` (MiSans 13/400), `.type-section-title` (Noto Serif SC 20/500 or PT Serif 400 in English), `.type-page-title` (Noto Serif SC 32/500 or PT Serif 400 in English), `.type-numeric` (MiSans 400), and `.type-display` (Noto Serif SC or PT Serif 400). Chinese text uses native spacing; only uppercase English brand metadata may use restrained tracking up to `0.08em`.
+
+## Canvas and chat interaction
+
+- The canvas exposes one user-facing **Chat** entry that opens the built-in conversation directly. The canvas does not expose Agent naming, built-in/external switching, Codex or MCP status, Skill management, or extra installation. Creative Skill creation, import, versions, and enablement live on a dedicated Assets-area page; canvas Chat only offers a compact picker for enabled compatible Skills. Selected nodes automatically appear as compact context above the composer; up to four selected images are sent as real multimodal content rather than names or internal IDs.
+- Short instructions are completed with the subject, requested change, preservation constraints, and output requirements before routing to edit, outpaint, upscale, three-view, or arrange capabilities. Prompt-only polishing returns text without mutating the canvas. The composer offers Manual and Automatic execution plus the configured text model/channel; first use defaults to Manual. A manual approval card opens with the interpreted intent, references and targets, action, complete prompt, ratio, output count, and model-call count, while completed history stays compact. Each approval contains at most one generation action. Proposals are bound to the canvas content and selection that produced them, so stale cards are discarded and a target with an active generation cannot be started again. Image-transformation results become connected child nodes and leave their originals unchanged; failed or canceled work must not restore an old canvas snapshot over edits the user made afterward.
+- The wheel pans the canvas and `Ctrl/Cmd + wheel` zooms around the pointer. The bottom toolbar provides explicit Select and Hand modes, with Space temporarily activating Hand outside editable content. Fit all, Fit selection, and 100% preserve predictable framing; Arrange affects a multi-selection first or the full canvas otherwise, follows graph edges left to right, and keeps grouped children together.
+- Node content remains in canvas coordinates and scales to preserve spatial relationships. Node titles, connection handles, resize hit areas, selection actions, prompt inputs, and floating tools are screen-space controls: they retain stable readable and clickable dimensions through zoom. Prompt overlays follow their nodes, avoid node tools by their actual occupied rectangles, and stay within boundaries that reserve the 64px top area and bottom dock. When neither side has enough room, they retain a usable editing height and scroll internally, covering the node itself only as a last resort without overlapping the toolbar. Opening the mini-map moves the zoom dock to the opposite side.
+- The top bar contains only Home, side panel, canvas title, and Chat. The bottom toolbar emphasizes Select, Hand, Add, Undo/Redo, Arrange, Fit view, and More. Image nodes use icon-first Edit, Outpaint, Upscale, Three views, and More actions with tooltips; Outpaint supports a target ratio and optional instruction, Upscale is described as deterministic high-quality interpolation rather than AI, and Three views creates front, side, and back child nodes. Lower-frequency and destructive actions remain in More with appropriate confirmation.
+
+## Motion
+
+- The signature motion language is **Seasonal Flow**: elegant, lightly viscous, and never sluggish. Cinnabar means hover/exploration; champagne gold means click confirmation. The canonical sequence is “cinnabar follows → blooms from the source → gold confirms → motion settles,” with at most one primary moving focal point in a viewport.
+- `design-tokens.ts` owns 120/200/240/280/320/380/440ms durations and shared out/settle/exit curves. High-frequency pointer coordinates remain in refs and CSS variables instead of React state. Real routes use React Router View Transitions plus a Web Animations fallback and move reversibly by navigation order within 10–14px: moving downward in navigation enters from below, and returning plays the exact opposite direction. Settled text keeps no transform, filter, or compositing residue.
+- Home keeps one pixel-aligned nine-row `FOURJ` grid. The pointer reveal combines a faster champagne core with a larger, slower cinnabar field; after about 1.35 seconds idle, three mask groups genuinely drift through `mask-position` on staggered 29–35 second paths rather than merely changing opacity over fixed characters. Pointer activity smoothly takes priority. Dots, thin filaments, long comet tails, neon, and single sweeps are forbidden.
+- A full-height 48px Home edge zone exposes a small brand-serif Toolbar label plus the cinnabar-and-gold stroke, so the visible mark is not the only hit target. The panel enters and leaves from the left over 380ms, keeps 420ms exit grace, and cancels closing when the pointer returns. Leaving an immersive canvas for Home immediately hides both the canvas navigation and Chat panel while preserving the conversation and background work; ordinary routes may retain the existing temporary-dock transition. Hover uses a bounded viscous cinnabar field, while a click blooms once at the pointer and settles into a stationary gold anchor instead of moving a gold block between rows.
+- Image and video generation histories share a compact two-layer cinnabar hover field with no filament or solar-disc effect. A click produces one source-local gold bloom, the active record keeps a stationary warm-gold edge, and hover always fades on pointer leave independently of active, checked, or focused state. Existing canvas-card behavior and business layouts remain intact. `prefers-reduced-motion` disables these effects.
+- Windows uses a transparent native 38px Window Controls Overlay so the web title bar is the one continuous surface. Theme changes update symbols and the window backing color without painting a separate rectangle behind minimize, maximize, and close. Drawers, dialogs, previews, and notifications continue to respect the shared safe area.
+
+## Settings, storage, and personal statistics
+
+- Creative Statistics, Trash, Settings, Canvas Library, My Assets, and Prompt Center share one standard route-page header: title, description, and optional actions only, with a common divider and spacing. Eyebrows, emoji, decorative header icons, and page-specific header gradients are excluded. Workbenches and the immersive canvas keep their task-specific chrome.
+- Settings has six peer sections: AI services, Creation preferences, Sync & migration, Storage & space, Content sources, and System & about. Desktop keeps the page header and left navigation fixed while only the right content scrolls; narrow layouts keep top tabs. Configuration export/import and WebDAV live under Sync & migration, with explicit credential and non-versioned-backup warnings. Workspace locations, storage health, unreferenced-media cleanup, caches, and Trash live under Storage & space.
+- Every Settings section renders its visible chapters from one ordered array and derives continuous `01/02/03` numbering from that array. Conditional chapters renumber immediately when hidden; chapter titles have no decorative icons, while functional controls, navigation, status, metrics, and list rows may retain icons.
+- Trash deletion reports records removed, files physically deleted, files retained by references, and failures. Users can inspect canvas, asset, workbench, and other-record references before deletion; referenced files have no force-delete path. Unreferenced cleanup accepts only image, video, and audio categories and rechecks live browser references in the desktop process before deleting.
+- Creative statistics combine legacy image-workbench history with newly tracked workbench and canvas generate/edit/outpaint/upscale/three-view activity. They add text-node and character counts, activity days, streaks, time/model breakdowns, and canvas ranking. Text provenance is manual, AI, mixed, imported, or unknown; imported and unknown nodes are excluded from the manual/AI ratio. Versioned activity metadata never stores prompt or text bodies, and the UI states when detailed tracking began.
+- Statistics explicitly separate immutable Creation history from Current content. Deleting work, canvases, nodes, assets, generation records, Trash, or unreferenced media never reduces history, and date filters apply only to history. Current content reflects existing canvas nodes and characters and changes with deletion. Creation history has its own phrase-confirmed destructive action under Storage & space; a clearing tombstone prevents older WebDAV manifests, legacy logs, or config imports from reviving cleared entries.
+
+## Rollout
+
+- **P0 token layer (done, pending test)**: tokens, antd/canvas derivation, CSS variables, semantic typography, brand rename, logo.
+- **P1 layout & workbenches (done, pending test)**: 224px grouped desktop sidebar with a normalized Personal Center/version/language/theme footer, synchronized mobile drawer, immersive canvas route, real Home content, and reorganized image/video workbenches.
+- **P2 canvas refresh (done, pending test)**: nodes, stable screen-space controls, minimal toolbars, the single built-in Chat entry, navigation and arrangement, mini-map, side panels, menus, settings popovers, and editing dialogs aligned to theme tokens.
+- **P3 polish (done, pending test)**: Assets, Prompt Center, Statistics, Settings, the `?` shortcut sheet, and global motion are implemented.
+
+Boundaries: keep routing, primary stores/services, and component libraries; do not add a new mobile architecture, but keep the existing mobile navigation synchronized. Generation-history state may expand only where an explicit interaction requires it.

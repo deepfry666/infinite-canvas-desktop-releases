@@ -1,0 +1,74 @@
+---
+title: Canvas Data Structure
+description: Local canvas storage, nodes, media files, and cleanup
+---
+
+# Canvas Data Structure
+
+## Storage
+
+In the desktop app, the workspace is authoritative: canvas projects and My Assets are written as readable workspace state files (`projects/canvas-projects.json` and `projects/asset-library.json`), while media is stored under `assets/images`, `assets/videos`, and `assets/audio`. The Electron renderer uses a localForage-compatible adapter and can import legacy renderer storage when appropriate; it is not a separately deployed browser product. Project JSON stores display URLs, `storageKey`, and metadata rather than large base64 payloads.
+
+## Project
+
+```ts
+type CanvasProject = {
+  id: string;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  nodes: CanvasNodeData[];
+  connections: CanvasConnection[];
+  chatSessions: CanvasAssistantSession[];
+  activeChatId: string | null;
+  backgroundMode: "lines" | "dots" | "blank";
+  showImageInfo: boolean;
+  viewport: { x: number; y: number; k: number };
+};
+```
+
+The viewport stores screen translation in `x` and `y`, and scale in `k`.
+
+## Nodes and edges
+
+```ts
+type CanvasNodeData = {
+  id: string;
+  type: "image" | "text" | "config" | "video";
+  title: string;
+  position: { x: number; y: number };
+  width: number;
+  height: number;
+  metadata?: CanvasNodeMetadata;
+};
+
+type CanvasConnection = {
+  id: string;
+  fromNodeId: string;
+  toNodeId: string;
+};
+```
+
+Node positions and sizes use canvas-world coordinates. Edges store only node IDs; their paths are calculated while rendering. Deleting a node removes its connected edges.
+
+Common metadata includes content, prompt, status, generation mode, model, size, count, natural dimensions, image results, input order, `storageKey`, MIME type, and byte size. A multi-image generation remains one image node: `images` creates all requested slots before generation starts and records each slot's `status`, `errorDetails`, and completed image data. `primaryImageId` selects the result mirrored by the node-level `content` and image metadata; the first successful slot becomes primary immediately. Image and video `content` values are renderer-session display URLs (`workspace://` in the desktop app, or legacy `blob:` URLs); `storageKey` is the persistent identity.
+
+## Assistant sessions
+
+```ts
+type CanvasAssistantSession = {
+  id: string;
+  title: string;
+  messages: CanvasAssistantMessage[];
+  createdAt: string;
+  updatedAt: string;
+};
+```
+
+Message references and generated images use the same blob-storage rules. They are converted to data URLs temporarily only when an AI endpoint requires base64.
+
+## Media lifecycle
+
+`uploadImage()` writes desktop media into the selected workspace and returns a `workspace:assets/...` storage key with a `workspace://` display URL. The non-desktop development fallback uses an `image:<id>` key in `image_files` and an in-memory object URL. Opening a project resolves each storage key into the current renderer display URL.
+
+Cleanup is reference-based. After deleting or replacing assets, nodes, canvases, or Chat content, the application checks canvas projects, My Assets, workbenches, durable generation records, and active transient tasks. It only asks the desktop process to remove a candidate file when it is exclusive and no active generation is present; invalid reference data or deletion failures retain the file. This prevents deleting media still shared by another feature.

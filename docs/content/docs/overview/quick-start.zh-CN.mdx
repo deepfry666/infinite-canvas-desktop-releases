@@ -1,0 +1,31 @@
+---
+title: 快速开始
+description: 安装或开发运行四季画布桌面应用
+---
+
+# 快速开始
+
+四季画布是纯桌面应用。当前公开发行物只有 Windows x64 安装包，不提供 Vercel、Render、Docker 或其他网页端部署。
+
+## 安装稳定版
+
+从 [四季画布发行仓库](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases) 下载最新稳定版安装包。首次启动后，在「设置」中添加自己的 AI 渠道、API Key 和模型，再确认本地工作区位置。
+
+## 本地开发
+
+```bash
+npm run setup
+npm run desktop:dev
+```
+
+`web/` 只是 Electron 使用的 React 渲染层。开发命令会临时启动 Vite 本地服务供 Electron 加载；正式安装包直接加载随包构建的本地文件，不需要浏览器或网络站点。
+
+## 使用建议
+
+- 在设置中填写自己的 `Base URL`、`API Key` 和模型名。
+- 画布、素材与生成记录默认保存在本机工作区；需要跨设备同步时可自行配置 WebDAV。
+- API Key 保存在桌面应用的本地配置中，由桌面渲染层直接请求用户配置的兼容接口。
+
+## 说明
+
+- 浏览器中的 Vite 页面仅用于源码开发和调试，不是网页产品，也不作为发行目标。

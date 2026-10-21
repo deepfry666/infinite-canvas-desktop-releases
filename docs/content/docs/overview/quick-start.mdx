@@ -1,0 +1,23 @@
+---
+title: Quick Start
+description: Install or develop the FourJ Canvas desktop app
+---
+
+# Quick Start
+
+FourJ Canvas is a desktop-only product. The only public artifact is the Windows x64 installer; Vercel, Render, Docker, and other web deployments are not supported product targets.
+
+## Install the stable release
+
+Download the latest stable installer from the [FourJ Canvas releases repository](https://github.com/deepfry666/infinite-canvas-desktop-releases/releases). On first launch, configure your AI endpoint, API key, models, and local workspace in Settings.
+
+## Develop locally
+
+```bash
+npm run setup
+npm run desktop:dev
+```
+
+The `web/` directory is the React renderer used by Electron, not a separate web product. Development temporarily starts a local Vite server for Electron; packaged builds load bundled local files and do not require a browser-hosted site.
+
+Canvas projects, My Assets, and generation history are stored in the local desktop workspace. The API key is stored in local application configuration and used by the renderer to call the configured OpenAI-compatible endpoint directly. WebDAV synchronization is optional.

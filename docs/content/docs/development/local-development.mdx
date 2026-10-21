@@ -1,0 +1,30 @@
+---
+title: Local Development
+description: Develop the Electron desktop application locally
+---
+
+# Local Development
+
+FourJ Canvas is an Electron desktop product. `web/` contains the React renderer loaded by the desktop window; it is not a separate web product. The renderer sends AI requests directly to the user's configured OpenAI-compatible endpoint.
+
+## Start the desktop app
+
+```bash
+npm run setup
+npm run desktop:dev
+```
+
+Development starts `http://localhost:3000` temporarily for Electron to load. This address is for local debugging only; packaged builds load bundled files from `web/dist`. Enter your `Base URL`, API key, and model names in Settings. Prompt sources and WebDAV are accessed directly by the desktop renderer.
+
+## Start the documentation site
+
+```bash
+cd docs
+bun run dev
+```
+
+Common locations:
+
+- Canvas, pages, and interactions: desktop renderer in `web/`
+- Prompt caching: `web/src/services/api/prompts.ts`
+- Documentation content: `docs/content/docs/`

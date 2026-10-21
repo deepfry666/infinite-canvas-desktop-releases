@@ -1,0 +1,62 @@
+---
+title: Features
+description: Major features available in the current project
+---
+
+# Features
+
+## Canvas projects
+
+- Create, rename, duplicate, delete, import, and export canvas projects.
+- Persist projects in the local desktop workspace and optionally synchronize them with WebDAV.
+- Keep viewport, background, nodes, connections, and built-in Chat sessions with each project.
+
+## Infinite canvas
+
+- Pan, zoom, reset the view, select multiple nodes, copy and paste, undo and redo.
+- Drag files onto the canvas and use lines, dots, or a blank background.
+- Export the entire canvas or selected elements with their resources.
+
+## Nodes and workflows
+
+- Text, image, video, and generation-configuration nodes.
+- Connect text prompts and reference media to generation nodes.
+- Generate or rewrite text, create images, edit images from references, and create videos.
+- Preserve original image ratios by default and organize batch results as connected nodes.
+- Record prompts, models, dimensions, quality, and references on generated nodes for retries.
+
+## AI generation
+
+- Connect to user-provided OpenAI-compatible endpoints directly from the Electron renderer.
+- Configure multiple channels, fetch or enter model names, and choose default text, image, and video models.
+- Support image count, aspect ratio, quality, transparent backgrounds, reasoning effort, and custom invocation scripts.
+- Support OpenAI-style video endpoints and Volcengine Ark generation tasks.
+
+## Built-in Chat
+
+- Open one built-in Chat panel from a canvas and use its current selection and canvas context.
+- Turn short requests into complete prompts, then return prompt-only refinements or propose structured canvas actions.
+- Choose manual approval or automatic approval, and select a configured text model for the conversation.
+- Keep conversations local to their canvas and show the interpreted intent, target, prompt, and expected result before a manual action is approved.
+
+## Plugin system
+
+Canvas plugins can contribute node types, rendering, inspectors, serialization, migration, toolbar actions, and optional AI generation capabilities. Built-in and local plugins are managed through the canvas UI.
+
+## Prompts and assets
+
+- Synchronize supported public prompt repositories and add custom standard JSON sources.
+- Search across enabled sources, filter by tags, inspect prompt details, copy prompts, and insert them into the canvas.
+- Store reusable images, videos, audio, text, and prompt assets in the local desktop workspace.
+
+## Configuration and synchronization
+
+- Export and import channel, model, generation, prompt-source, and WebDAV settings.
+- Store application data and API credentials in local desktop application storage.
+- Use WebDAV for optional cross-device synchronization.
+
+## Current limitations
+
+- FourJ Canvas is a desktop-only product and does not provide built-in cloud accounts or cloud storage.
+- API keys remain in local application storage and the Electron renderer sends requests directly to configured providers.
+- The public release contains only desktop installers and update assets; no hosted web application or application container is provided.
